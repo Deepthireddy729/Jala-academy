@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node www/server.js",
+    "dev": "nodemon www/server.js",
+    "heroku-postbuild": "cd www/client && npm install && npm run build",
     "build": "echo 'No build required for this Node.js app'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -4,7 +4,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const fs = require('fs');
-const db = require('./db');
+const db = require('../db');
 
 const app = express();
 
