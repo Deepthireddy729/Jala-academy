@@ -495,22 +495,20 @@ app.get('/more/collapsible', (req, res) => {
 // Image upload/download (More -> Images)
 const uploadDir = path.join(__dirname, 'uploads');
 
-// Handle serverless environment (read-only filesystem)
+// Handle environments where filesystem is read-only
 let useMemoryStorage = false;
 try {
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir, { recursive: true });
   }
 } catch (err) {
-  // In serverless environments like Vercel, we can't create directories
   console.warn('Could not create uploads directory:', err.message);
   console.log('Fallback: Using memory storage for file uploads');
-  useMemoryStorage = true; // Fallback to memory storage
+  useMemoryStorage = true;
 }
 
-// Configure storage based on environment
 const storage = useMemoryStorage
-  ? multer.memoryStorage() // Use memory storage in serverless environments
+  ? multer.memoryStorage() // Use memory storage in restricted environments
   : multer.diskStorage({    // Use disk storage locally
       destination: function (req, file, cb) {
         cb(null, uploadDir);
@@ -725,7 +723,7 @@ app.post('/more/settings', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-// For Vercel deployment, export the app for serverless function
+// Export app for module usage and start server when run directly
 if (require.main === module) {
   // Only start the server if this file is run directly (not imported)
   app.listen(PORT, () => {
