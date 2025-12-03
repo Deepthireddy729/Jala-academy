@@ -712,8 +712,9 @@ app.post('/more/settings', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-// For Vercel deployment, only listen if not in serverless environment
-if (process.env.NODE_ENV !== 'production') {
+// For Vercel deployment, export the app for serverless function
+if (require.main === module) {
+  // Only start the server if this file is run directly (not imported)
   app.listen(PORT, () => {
     console.log(`JALA Magnus clone running on http://localhost:${PORT}`);
   });
