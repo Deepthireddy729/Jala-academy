@@ -10,7 +10,8 @@
     <div class="auth-card">
       <h1>JALA Academy</h1>
       <p class="subtitle">Use the below details to login</p>
-      <div class="highlight">Learn everything on Real-Time Scenarios. FREE for all.</div>
+      <p><strong>Email:</strong> training@jalaacademy.com</p>
+      <p><strong>Password:</strong> jobprogram</p>
 
       <% if (error) { %>
         <div class="error"><%= error %></div>
@@ -19,43 +20,34 @@
       <form method="post" action="/login" class="auth-form">
         <div class="form-group">
           <label for="email">Email</label>
-          <div class="input-with-icon">
-            <input type="email" id="email" name="email" required value="training@jalaacademy.com" />
-            <span class="input-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 4 8 5 8-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-          </div>
+          <input type="email" id="email" name="email" required />
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <div class="input-with-icon">
-            <input type="password" id="password" name="password" required value="jobprogram" />
-            <span class="input-icon" aria-hidden="true">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6 10h12v10H6V10zm3 0V7a3 3 0 1 1 6 0v3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </span>
-          </div>
+          <input type="password" id="password" name="password" required />
         </div>
         <div class="form-row">
           <label class="checkbox">
             <input type="checkbox" name="rememberMe" />
             Remember Me
           </label>
-          <button type="submit" class="btn primary small">Sign In</button>
         </div>
-        <div class="or-sep">- OR -</div>
-        <a class="btn primary" href="/forgot-password">Forgot Password</a>
+        <button type="submit" class="btn primary">Sign In</button>
       </form>
 
-      <div class="auth-links" style="justify-content:center">
+      <div class="auth-links">
+        <a href="/forgot-password">Forgot Password</a>
         <a href="/admin/login">Admin Login</a>
       </div>
-    </div>
-  </div>
 
-  <div class="info-banner">
-    JALA Academy offers Job Guaranteed Programs for Freshers to 12 years’ experience on Full Stack Development / Automation Testing / Dev-Ops / QA/ SDET/Cyber Security / RPA / Cloud Technologies. Training would be completely on live Project scenarios. Read our website
-    <a href="https://jalaacademy.com/" target="_blank" rel="noreferrer" style="color:#e0e7ff; font-weight:600;">https://jalaacademy.com/</a>
-    for more details.
+      <div class="footer-note">
+        Learn everything on Real-Time Scenarios. FREE for all.
+        <br />
+        Read our website
+        <a href="https://jalaacademy.com/" target="_blank" rel="noreferrer">JALA Academy</a>
+        for more details.
+      </div>
+    </div>
   </div>
 </body>
 </html>

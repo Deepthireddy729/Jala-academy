@@ -713,18 +713,6 @@ app.post('/more/settings', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`JALA Magnus clone running on http://localhost:${PORT}`);
-  if (process.env.ENABLE_TUNNEL === 'true') {
-    try {
-      const lt = require('localtunnel');
-      lt({ port: PORT }).then((tunnel) => {
-        console.log(`Public URL: ${tunnel.url}`);
-        try { fs.writeFileSync(path.join(__dirname, 'tunnel-url.txt'), tunnel.url); } catch {}
-        tunnel.on('close', () => console.log('Tunnel closed'));
-      }).catch((err) => console.error('Tunnel error', err));
-    } catch (e) {
-      console.error('Localtunnel not installed', e.message);
-    }
-  }
 });
 
 

@@ -60,16 +60,6 @@ a:hover {
   color: #6b7280;
 }
 
-.highlight {
-  display: inline-block;
-  background: #fef08a;
-  color: #1f2937;
-  padding: 0.35rem 0.5rem;
-  border-radius: 0.25rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
 .error {
   margin-bottom: 1rem;
   padding: 0.75rem 1rem;
@@ -98,22 +88,6 @@ a:hover {
   font-size: 0.95rem;
   transition: all 0.2s ease;
   background: #ffffff;
-}
-
-.input-with-icon {
-  position: relative;
-}
-
-.input-with-icon input {
-  padding-right: 2.25rem;
-}
-
-.input-icon {
-  position: absolute;
-  right: 0.6rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #9ca3af;
 }
 
 .form-group input:focus {
@@ -184,12 +158,6 @@ a:hover {
   justify-content: space-between;
   margin-top: 1rem;
   font-size: 0.9rem;
-}
-
-.or-sep {
-  text-align: center;
-  color: #6b7280;
-  margin: 0.75rem 0 1rem;
 }
 
 .footer-note {
@@ -527,18 +495,6 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
-}
-
-.info-banner {
-  position: fixed;
-  left: 1.5rem;
-  right: 1.5rem;
-  bottom: 1.5rem;
-  background: #1d4ed8;
-  color: white;
-  padding: 1rem 1.25rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3);
 }
 
 .menu-grid {
