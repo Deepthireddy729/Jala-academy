@@ -1,0 +1,134 @@
+<%- include('layout', { 
+  title: 'More - Settings', 
+  body: `
+    <section class="dashboard">
+      <h1>Settings</h1>
+      
+      ${typeof success !== 'undefined' && success ? `<div class="success" style="margin-bottom:1.5rem;">Settings saved successfully!</div>` : ''}
+      ${typeof errors !== 'undefined' && errors && errors.length ? `
+        <div class="error" style="margin-bottom:1.5rem;">
+          ${errors.map(e => `<div>${e}</div>`).join('')}
+        </div>
+      ` : ''}
+
+      <form method="post" action="/more/settings" class="settings-form">
+        <div class="settings-section">
+          <h2 class="settings-section-title">Profile Settings</h2>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="displayName">Display Name</label>
+              <input type="text" id="displayName" name="displayName" value="${settings && settings.displayName ? settings.displayName : 'Guest User'}" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" value="${settings && settings.email ? settings.email : (user && user.email ? user.email : '')}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" name="bio" rows="3" placeholder="Tell us about yourself">${settings && settings.bio ? settings.bio : ''}</textarea>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h2 class="settings-section-title">Notification Preferences</h2>
+          <div class="form-group">
+            <label class="checkbox">
+              <input type="checkbox" name="emailNotifications" ${settings && settings.emailNotifications ? 'checked' : ''} />
+              <span>Email Notifications</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="checkbox">
+              <input type="checkbox" name="pushNotifications" ${settings && settings.pushNotifications ? 'checked' : ''} />
+              <span>Push Notifications</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="checkbox">
+              <input type="checkbox" name="smsNotifications" ${settings && settings.smsNotifications ? 'checked' : ''} />
+              <span>SMS Notifications</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h2 class="settings-section-title">Theme & Display</h2>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="theme">Theme</label>
+              <select id="theme" name="theme">
+                <option value="light" ${settings && settings.theme === 'light' ? 'selected' : ''}>Light</option>
+                <option value="dark" ${settings && settings.theme === 'dark' ? 'selected' : ''}>Dark</option>
+                <option value="auto" ${settings && settings.theme === 'auto' ? 'selected' : ''}>Auto (System)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="language">Language</label>
+              <select id="language" name="language">
+                <option value="en" ${settings && settings.language === 'en' ? 'selected' : ''}>English</option>
+                <option value="es" ${settings && settings.language === 'es' ? 'selected' : ''}>Spanish</option>
+                <option value="fr" ${settings && settings.language === 'fr' ? 'selected' : ''}>French</option>
+                <option value="de" ${settings && settings.language === 'de' ? 'selected' : ''}>German</option>
+                <option value="hi" ${settings && settings.language === 'hi' ? 'selected' : ''}>Hindi</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="timezone">Timezone</label>
+            <select id="timezone" name="timezone">
+              <option value="UTC" ${settings && settings.timezone === 'UTC' ? 'selected' : ''}>UTC</option>
+              <option value="America/New_York" ${settings && settings.timezone === 'America/New_York' ? 'selected' : ''}>Eastern Time (ET)</option>
+              <option value="America/Chicago" ${settings && settings.timezone === 'America/Chicago' ? 'selected' : ''}>Central Time (CT)</option>
+              <option value="America/Los_Angeles" ${settings && settings.timezone === 'America/Los_Angeles' ? 'selected' : ''}>Pacific Time (PT)</option>
+              <option value="Asia/Kolkata" ${settings && settings.timezone === 'Asia/Kolkata' ? 'selected' : ''}>India Standard Time (IST)</option>
+              <option value="Europe/London" ${settings && settings.timezone === 'Europe/London' ? 'selected' : ''}>Greenwich Mean Time (GMT)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h2 class="settings-section-title">Privacy & Security</h2>
+          <div class="form-group">
+            <label class="checkbox">
+              <input type="checkbox" name="profileVisibility" ${settings && settings.profileVisibility ? 'checked' : ''} />
+              <span>Make profile visible to others</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="checkbox">
+              <input type="checkbox" name="twoFactorAuth" ${settings && settings.twoFactorAuth ? 'checked' : ''} />
+              <span>Enable Two-Factor Authentication</span>
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="sessionTimeout">Session Timeout (minutes)</label>
+            <input type="number" id="sessionTimeout" name="sessionTimeout" min="5" max="480" value="${settings && settings.sessionTimeout ? settings.sessionTimeout : '30'}" />
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h2 class="settings-section-title">Account Management</h2>
+          <div class="form-group">
+            <label for="dataExport">Data Export</label>
+            <button type="button" class="btn" onclick="alert('Data export feature coming soon!')">Export My Data</button>
+          </div>
+          <div class="form-group">
+            <label>Account Actions</label>
+            <div style="display:flex; gap:0.75rem;">
+              <button type="button" class="btn" onclick="if(confirm('Are you sure you want to deactivate your account?')) alert('Account deactivation feature coming soon!')">Deactivate Account</button>
+              <button type="button" class="btn" style="background:#ef4444; color:white;" onclick="if(confirm('Are you absolutely sure? This action cannot be undone!')) alert('Account deletion feature coming soon!')">Delete Account</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions" style="margin-top:2rem;">
+          <button type="submit" class="btn primary">Save All Settings</button>
+          <button type="button" class="btn" onclick="window.location.reload()" style="margin-left:0.5rem;">Reset</button>
+        </div>
+      </form>
+    </section>
+  ` 
+}) %>
+
+

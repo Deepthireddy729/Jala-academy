@@ -1,0 +1,13 @@
+<%- include('layout', { 
+  title: 'More - Slider', 
+  body: `
+    <section class="dashboard">
+      <h1>Slider Demo</h1>
+      <p>Basic HTML5 range slider to mimic UI controls in the More menu.</p>
+      <input type="range" id="level" name="level" min="0" max="100" value="40" oninput="document.getElementById('levelValue').innerText = this.value" />
+      <p>Value: <span id="levelValue">40</span></p>
+    </section>
+  ` 
+}) %>
+
+

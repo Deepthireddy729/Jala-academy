@@ -1,0 +1,38 @@
+<%- include('layout', { 
+  title: employee && employee.id ? 'Edit Employee' : 'New Employee', 
+  body: `
+    <section class="dashboard">
+      <h1>${employee && employee.id ? 'Edit Employee' : 'New Employee'}</h1>
+      ${error ? `<div class="error">${error}</div>` : ''}
+      <form method="post" action="${employee && employee.id ? `/employees/${employee.id}` : '/employees'}" class="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input id="name" name="name" value="${employee ? employee.name : ''}" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input id="email" type="email" name="email" value="${employee ? employee.email : ''}" required />
+        </div>
+        <div class="form-group">
+          <label for="department">Department</label>
+          <input id="department" name="department" value="${employee ? employee.department || '' : ''}" />
+        </div>
+        <div class="form-group">
+          <label for="salary">Salary</label>
+          <input id="salary" name="salary" type="number" step="0.01" value="${employee && employee.salary != null ? employee.salary : ''}" />
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="Active" ${!employee || employee.status === 'Active' ? 'selected' : ''}>Active</option>
+            <option value="Inactive" ${employee && employee.status === 'Inactive' ? 'selected' : ''}>Inactive</option>
+          </select>
+        </div>
+        <button type="submit" class="btn primary">Save</button>
+        <a href="/employees" class="btn">Cancel</a>
+      </form>
+    </section>
+  ` 
+}) %>
+
+

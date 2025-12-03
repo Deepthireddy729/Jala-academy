@@ -1,0 +1,105 @@
+<%- include('layout', { 
+  title: 'Employee - Edit', 
+  body: `
+    <section class="dashboard">
+      <h1>Employee <span style="font-weight:400;">Edit</span></h1>
+      <div class="card employee-card">
+        <h2 class="employee-section-title">Employee Details</h2>
+
+        ${errors && errors.length ? `
+          <div class="error">
+            ${errors.map(e => `<div>${e}</div>`).join('')}
+          </div>
+        ` : ''}
+
+        <form method="post" action="/employee/${employee.id}/edit" class="employee-form">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="first_name">First Name</label>
+              <input id="first_name" name="first_name" value="${employee.first_name || ''}" required />
+            </div>
+            <div class="form-group">
+              <label for="last_name">Last Name</label>
+              <input id="last_name" name="last_name" value="${employee.last_name || ''}" />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" type="email" name="email" value="${employee.email || ''}" required />
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="mobile">Mobile Number</label>
+              <input id="mobile" name="mobile" value="${employee.mobile || ''}" />
+            </div>
+            <div class="form-group">
+              <label for="dob">Date Of Birth</label>
+              <input id="dob" name="dob" type="date" value="${employee.dob || ''}" />
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <div>
+                <label><input type="radio" name="gender" value="Male" ${employee.gender === 'Male' ? 'checked' : ''} /> Male</label>
+                <label style="margin-left:1rem;"><input type="radio" name="gender" value="Female" ${employee.gender === 'Female' ? 'checked' : ''} /> Female</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="3">${employee.address || ''}</textarea>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="country">Country</label>
+              <select id="country" name="country">
+                <option value="">--Select Country--</option>
+                ${countries
+                  .map(
+                    c => `<option value="${c}" ${employee.country === c ? 'selected' : ''}>${c}</option>`
+                  )
+                  .join('')}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="city">City</label>
+              <select id="city" name="city">
+                <option value="">--Select City--</option>
+                ${cities
+                  .map(
+                    c => `<option value="${c}" ${employee.city === c ? 'selected' : ''}>${c}</option>`
+                  )
+                  .join('')}
+              </select>
+            </div>
+            <div class="form-group">
+              <label>&nbsp;</label>
+              <label><input type="checkbox" name="other_city" value="1" ${employee.other_city ? 'checked' : ''} /> Other City</label>
+            </div>
+          </div>
+
+          <h2 class="employee-section-title">Skills</h2>
+          <div class="skills-grid">
+            ${skills
+              .map(s => {
+                const selected = (employee.skills || '').includes(s);
+                return `
+                  <label><input type="checkbox" name="skills" value="${s}" ${selected ? 'checked' : ''} /> ${s}</label>
+                `;
+              })
+              .join('')}
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Save</button>
+            <a href="/employee/search" class="btn" style="margin-left:0.5rem;">Cancel</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  ` 
+}) %>
+
+

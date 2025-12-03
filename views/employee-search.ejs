@@ -1,0 +1,73 @@
+<%- include('layout', { 
+  title: 'Employee - Search', 
+  body: `
+    <section class="dashboard">
+      <h1>Employee <span style="font-weight:400;">Search</span></h1>
+
+      <div class="card employee-card">
+        <h2 class="employee-section-title">Search Employee</h2>
+        <form method="post" action="/employee/search" class="employee-form">
+          <div class="form-row-3">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Employee Name" value="${filters.name || ''}" />
+            </div>
+            <div class="form-group">
+              <label for="mobile">Mobile No</label>
+              <input id="mobile" name="mobile" placeholder="Mobile No" value="${filters.mobile || ''}" />
+            </div>
+            <div class="form-group" style="display:flex; align-items:flex-end; justify-content:flex-end; gap:0.5rem;">
+              <button type="submit" class="btn primary">Search</button>
+              <a href="/employee/search" class="btn">Clear</a>
+              <a href="/employee/create" class="btn primary" style="background:#16a34a;">Add Employee</a>
+            </div>
+          </div>
+        </form>
+
+        <table class="table" style="margin-top:1.5rem;">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Mobile No</th>
+              <th>Email Id</th>
+              <th>Gender</th>
+              <th>Birth Date</th>
+              <th>Country</th>
+              <th>City</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${employees.length === 0
+              ? `<tr><td colspan="9">No employees found.</td></tr>`
+              : employees
+                  .map(
+                    e => `
+                      <tr>
+                        <td>${e.first_name || ''}</td>
+                        <td>${e.last_name || ''}</td>
+                        <td>${e.mobile || ''}</td>
+                        <td>${e.email || ''}</td>
+                        <td>${e.gender === 'Female' ? '♀' : e.gender ? '♂' : ''}</td>
+                        <td>${e.dob || ''}</td>
+                        <td>${e.country || ''}</td>
+                        <td>${e.city || ''}</td>
+                        <td>
+                          <a href="/employee/${e.id}/edit" class="btn small" style="background:#16a34a; color:white; margin-right:0.25rem;">Edit</a>
+                          <form method="post" action="/employee/${e.id}/delete" style="display:inline" onsubmit="return confirm('Delete this employee?');">
+                            <button type="submit" class="btn small" style="background:#dc2626; color:white;">Delete</button>
+                          </form>
+                        </td>
+                      </tr>
+                    `
+                  )
+                  .join('')}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  ` 
+}) %>
+
+

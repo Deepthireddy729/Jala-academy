@@ -1,0 +1,139 @@
+<%- include('layout', { 
+  title: 'More - Autocomplete', 
+  body: `
+    <section class="dashboard">
+      <h1>Autocomplete</h1>
+      <div class="tabs">
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="single">Single Values</button>
+          <button class="tab-btn" data-tab="multi">Multiple Values</button>
+        </div>
+        <div class="tabs-body">
+          <div class="tab-panel active" id="single">
+            <div class="form-group">
+              <label for="singleSelect">Tag :</label>
+              <select id="singleSelect" name="singleSelect">
+                <option value="">-- Select Language --</option>
+                <option>ActionScript</option>
+                <option>AppleScript</option>
+                <option>Asp</option>
+                <option>BASIC</option>
+                <option>C</option>
+                <option>C++</option>
+                <option>Clojure</option>
+                <option>COBOL</option>
+                <option>ColdFusion</option>
+                <option>Erlang</option>
+                <option>Fortran</option>
+                <option>Groovy</option>
+                <option>Haskell</option>
+                <option>Java</option>
+                <option>JavaScript</option>
+                <option>Lisp</option>
+                <option>Perl</option>
+                <option>PHP</option>
+                <option>Python</option>
+                <option>Ruby</option>
+                <option>Scala</option>
+                <option>Scheme</option>
+              </select>
+            </div>
+          </div>
+          <div class="tab-panel" id="multi">
+            <div class="form-group">
+              <label>Tags :</label>
+              <div id="multiTags" class="tag-input">
+                <span class="tag-input-placeholder">Start typing to add tags</span>
+                <input id="multiInput" type="text" autocomplete="off" />
+              </div>
+              <ul id="multiSuggestions" class="auto-suggest"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        const availableTags = ['Selenium', 'Java', 'Cucumber', 'API Testing', 'UI Testing', 'DevOps', 'AWS', 'Full Stack'];
+
+        // Tabs behaviour
+        document.querySelectorAll('.tabs-header .tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.tabs-header .tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tabs-body .tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+          });
+        });
+
+        // Helper to create suggestion list
+        function bindAutocomplete(inputEl, listEl, onSelect) {
+          inputEl.addEventListener('input', () => {
+            const value = inputEl.value.toLowerCase();
+            listEl.innerHTML = '';
+            if (!value) return;
+            const items = availableTags.filter(t => t.toLowerCase().includes(value));
+            items.forEach(tag => {
+              const li = document.createElement('li');
+              li.textContent = tag;
+              li.addEventListener('click', () => {
+                onSelect(tag);
+                listEl.innerHTML = '';
+              });
+              listEl.appendChild(li);
+            });
+          });
+          inputEl.addEventListener('blur', () => {
+            setTimeout(() => (listEl.innerHTML = ''), 150);
+          });
+        }
+
+        // Multiple values autocomplete with chips
+        const tagContainer = document.getElementById('multiTags');
+        const multiInput = document.getElementById('multiInput');
+        const multiList = document.getElementById('multiSuggestions');
+
+        function updatePlaceholder() {
+          const hasTags = tagContainer.querySelectorAll('.tag-chip').length > 0;
+          const placeholder = tagContainer.querySelector('.tag-input-placeholder');
+          placeholder.style.display = hasTags ? 'none' : 'inline-block';
+        }
+
+        function addTag(label) {
+          const existing = Array.from(tagContainer.querySelectorAll('.tag-chip-label')).some(
+            el => el.textContent === label
+          );
+          if (existing) return;
+          const chip = document.createElement('span');
+          chip.className = 'tag-chip';
+          chip.innerHTML = '<span class="tag-chip-label">' + label + '</span><button type="button" class="tag-chip-remove">×</button>';
+          chip.querySelector('.tag-chip-remove').addEventListener('click', () => {
+            tagContainer.removeChild(chip);
+            updatePlaceholder();
+          });
+          tagContainer.insertBefore(chip, multiInput);
+          multiInput.value = '';
+          updatePlaceholder();
+        }
+
+        bindAutocomplete(multiInput, multiList, addTag);
+
+        multiInput.addEventListener('keydown', e => {
+          if (e.key === 'Enter' && multiInput.value.trim()) {
+            e.preventDefault();
+            addTag(multiInput.value.trim());
+          } else if (e.key === 'Backspace' && !multiInput.value) {
+            const chips = tagContainer.querySelectorAll('.tag-chip');
+            if (chips.length) {
+              tagContainer.removeChild(chips[chips.length - 1]);
+              updatePlaceholder();
+            }
+          }
+        });
+
+        updatePlaceholder();
+      </script>
+    </section>
+  ` 
+}) %>
+
+

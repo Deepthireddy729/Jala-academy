@@ -1,0 +1,117 @@
+<%- include('layout', { 
+  title: 'More - Popups', 
+  body: `
+    <section class="dashboard" style="text-align:center;">
+      <h1>Popup</h1>
+      <div style="margin-top:2rem; display:inline-block;">
+        <div style="display:grid; grid-template-columns:repeat(3, 220px); gap:0.75rem;">
+          <button class="btn primary" id="popupOne">Popup One</button>
+          <button class="btn primary" id="popupTwo">Popup Two</button>
+          <button class="btn primary" id="popupThree">Popup Three</button>
+          <button class="btn primary" id="popupDuplicate">Popup Duplicate</button>
+          <button class="btn primary" id="duplicateTab">Duplicate Tab</button>
+          <button class="btn primary" id="windowPopup">In Window Popup</button>
+          <button class="btn primary" id="alertBox">Alert Box</button>
+          <button class="btn primary" id="confirmBox">Confirm Box</button>
+          <button class="btn primary" id="promptBox">Prompt Box</button>
+        </div>
+      </div>
+
+      <div id="popupOverlay" class="popup-overlay" style="display:none;">
+        <div class="popup" id="popupContent">
+          <h2 id="popupTitle">Popup</h2>
+          <p id="popupText">This is a popup.</p>
+          <button class="btn" id="closePopup">Close</button>
+        </div>
+      </div>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          const overlay = document.getElementById('popupOverlay');
+          const popupTitle = document.getElementById('popupTitle');
+          const popupText = document.getElementById('popupText');
+          const closeBtn = document.getElementById('closePopup');
+
+          if (!overlay || !popupTitle || !popupText || !closeBtn) return;
+
+          function openPopup(title, text) {
+            popupTitle.textContent = title;
+            popupText.textContent = text;
+            overlay.style.display = 'flex';
+          }
+
+          const btnOne = document.getElementById('popupOne');
+          const btnTwo = document.getElementById('popupTwo');
+          const btnThree = document.getElementById('popupThree');
+          const btnDup = document.getElementById('popupDuplicate');
+          const btnDupTab = document.getElementById('duplicateTab');
+          const btnWindow = document.getElementById('windowPopup');
+          const btnAlert = document.getElementById('alertBox');
+          const btnConfirm = document.getElementById('confirmBox');
+          const btnPrompt = document.getElementById('promptBox');
+
+          if (btnOne)
+            btnOne.addEventListener('click', () => {
+              window.open('https://www.google.com', 'popup_one', 'width=800,height=600');
+            });
+
+          if (btnTwo)
+            btnTwo.addEventListener('click', () => {
+              window.open('https://www.bing.com', 'popup_two', 'width=800,height=600');
+            });
+
+          if (btnThree)
+            btnThree.addEventListener('click', () => {
+              window.open('https://www.yahoo.com', 'popup_three', 'width=800,height=600');
+            });
+
+          if (btnDup)
+            btnDup.addEventListener('click', () => {
+              openPopup('Popup Duplicate', 'Another popup reusing the same layout.');
+            });
+
+          if (btnDupTab)
+            btnDupTab.addEventListener('click', () => {
+              window.open(window.location.href, '_blank');
+            });
+
+          if (btnWindow)
+            btnWindow.addEventListener('click', () => {
+              window.open('https://jalaacademy.com/', 'jalaPopup', 'width=800,height=600');
+            });
+
+          if (btnAlert)
+            btnAlert.addEventListener('click', () => {
+              alert('This is an alert box from JALA Magnus clone.');
+            });
+
+          if (btnConfirm)
+            btnConfirm.addEventListener('click', () => {
+              const ok = confirm('Do you confirm this action?');
+              openPopup('Confirm Box', ok ? 'You clicked OK.' : 'You clicked Cancel.');
+            });
+
+          if (btnPrompt)
+            btnPrompt.addEventListener('click', () => {
+              const value = prompt('Please enter your name:', '');
+              if (value !== null) {
+                openPopup('Prompt Box', 'Welcome, ' + (value || 'Guest') + '!');
+              }
+            });
+
+          closeBtn.addEventListener('click', () => {
+            overlay.style.display = 'none';
+          });
+
+          overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+              overlay.style.display = 'none';
+            }
+          });
+        });
+      </script>
+    </section>
+  ` 
+}) %>
+
+

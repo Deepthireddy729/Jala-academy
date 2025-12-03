@@ -1,0 +1,43 @@
+<%- include('layout', { 
+  title: 'More - Tooltips', 
+  body: `
+    <section class="dashboard" style="text-align:center;">
+      <h1>Tooltip</h1>
+      <div style="margin-top:3rem;">
+        <button id="tooltipButton" class="btn primary">
+          Check the Tooltip Before You Click.
+        </button>
+        <div id="buttonTooltip" class="tooltip-box" style="position:absolute; display:none;">
+          Thank you for being here!
+        </div>
+      </div>
+      <script>
+        const btn = document.getElementById('tooltipButton');
+        const tip = document.getElementById('buttonTooltip');
+
+        function positionTooltip() {
+          const rect = btn.getBoundingClientRect();
+          tip.style.left = rect.left + (rect.width / 2) - (tip.offsetWidth / 2) + 'px';
+          tip.style.top = rect.top - tip.offsetHeight - 8 + 'px';
+        }
+
+        btn.addEventListener('mouseenter', () => {
+          tip.style.display = 'block';
+          positionTooltip();
+        });
+
+        btn.addEventListener('mouseleave', () => {
+          tip.style.display = 'none';
+        });
+
+        window.addEventListener('resize', () => {
+          if (tip.style.display === 'block') {
+            positionTooltip();
+          }
+        });
+      </script>
+    </section>
+  ` 
+}) %>
+
+

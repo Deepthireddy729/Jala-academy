@@ -1,0 +1,84 @@
+<%- include('layout', { 
+  title: 'More - Links', 
+  body: `
+    <section class="dashboard">
+      <h1>Links</h1>
+      <div class="tabs">
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="working">Working Links</button>
+          <button class="tab-btn" data-tab="broken">Broken Links</button>
+          <button class="tab-btn" data-tab="image">Image Links</button>
+          <button class="tab-btn" data-tab="status">Status Codes</button>
+        </div>
+        <div class="tabs-body">
+          <div class="tab-panel active" id="working">
+            <div style="margin-top:2rem; text-align:center;">
+              <a href="https://www.google.com" target="_blank" style="color:red; margin-right:3rem;">Link 1</a>
+              <a href="https://www.bing.com" target="_blank" style="color:blue; margin-right:3rem;">Link 2</a>
+              <a href="https://www.yahoo.com" target="_blank" style="color:green;">Link 3</a>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="broken">
+            <div style="margin-top:2rem; text-align:center;">
+              <a href="/broken-link-1" style="color:red; margin-right:3rem;">Link 1</a>
+              <a href="/broken-link-2" style="color:blue; margin-right:3rem;">Link 2</a>
+              <a href="/broken-link-3" style="color:green;">Link 3</a>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="image">
+            <div style="margin-top:2rem; display:flex; justify-content:center; gap:2rem; align-items:center; flex-wrap:wrap;">
+              <a href="https://growic.com" target="_blank" style="display:block; text-decoration:none;">
+                <div style="background:#6B46C1; color:white; padding:0.75rem 1.25rem; border-radius:0.5rem; font-weight:600; font-size:1rem;">Growic</div>
+              </a>
+              <a href="https://www.linkedin.com" target="_blank" style="display:block;">
+                <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" style="height:60px; width:60px;" />
+              </a>
+              <a href="https://www.google.com" target="_blank" style="display:block;">
+                <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="Google" style="height:40px; width:auto;" />
+              </a>
+              <a href="https://jalaacademy.com" target="_blank" style="display:block; text-decoration:none;">
+                <div style="background:#2563EB; color:white; padding:0.75rem 1.25rem; border-radius:0.5rem; font-weight:600; font-size:1rem;">JALA</div>
+              </a>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="status">
+            <div style="margin-top:2rem; text-align:center;">
+              <span class="status-code" data-info="OK - Request succeeded" style="color:green; margin-right:3rem; cursor:pointer;">200</span>
+              <span class="status-code" data-info="Moved Permanently - Resource has new URL" style="color:blue; margin-right:3rem; cursor:pointer;">301</span>
+              <span class="status-code" data-info="Not Found - Resource does not exist" style="color:red; margin-right:3rem; cursor:pointer;">404</span>
+              <span class="status-code" data-info="Internal Server Error - Something went wrong on the server" style="color:orange; cursor:pointer;">500</span>
+            </div>
+            <p id="statusMessage" style="margin-top:1.5rem; text-align:center; font-size:0.95rem;"></p>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // Tabs switching
+        document.querySelectorAll('.tabs-header .tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.tabs-header .tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tabs-body .tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+          });
+        });
+
+        // Status code click behaviour – show explanation text
+        const statusMsg = document.getElementById('statusMessage');
+        document.querySelectorAll('.status-code').forEach(span => {
+          span.addEventListener('click', () => {
+            const code = span.textContent.trim();
+            const info = span.getAttribute('data-info') || '';
+            statusMsg.textContent = code + ' : ' + info;
+          });
+        });
+      </script>
+    </section>
+  ` 
+}) %>
+
+

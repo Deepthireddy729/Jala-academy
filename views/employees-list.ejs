@@ -1,0 +1,46 @@
+<%- include('layout', { 
+  title: 'Employees', 
+  body: `
+    <section class="dashboard">
+      <h1>Employees</h1>
+      <a href="/employees/new" class="btn primary">Add Employee</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${employees
+            .map(
+              (e) => `
+              <tr>
+                <td>${e.id}</td>
+                <td>${e.name}</td>
+                <td>${e.email}</td>
+                <td>${e.department || ''}</td>
+                <td>${e.salary != null ? e.salary : ''}</td>
+                <td>${e.status}</td>
+                <td>
+                  <a href="/employees/${e.id}/edit">Edit</a>
+                  <form method="post" action="/employees/${e.id}/delete" style="display:inline" onsubmit="return confirm('Delete this employee?');">
+                    <button type="submit" class="btn small">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            `
+            )
+            .join('')}
+        </tbody>
+      </table>
+    </section>
+  ` 
+}) %>
+
+

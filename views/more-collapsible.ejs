@@ -1,0 +1,138 @@
+<%- include('layout', { 
+  title: 'More - Collapsible Content', 
+  body: `
+    <section class="dashboard">
+      <h1>Collapsible Content</h1>
+      <div class="tabs">
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="single">Single Collapse</button>
+          <button class="tab-btn" data-tab="multi">Multiple Collapse</button>
+        </div>
+        <div class="tabs-body">
+          <div class="tab-panel active" id="single">
+            <div class="accordion">
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Know your goals and Prioritize Wisely
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-body">
+                  <p>
+                    Set clear, specific goals for your learning and career. Break them into smaller milestones and
+                    prioritize what to work on each day so you always know your next step.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Be focused and Eliminate Distractions
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-body">
+                  <p>
+                    Create a distraction‑free environment when you study. Switch off notifications and dedicate focused
+                    time blocks to practice real scenarios without interruption.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Choose the right mentor to Succeed in career
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-body">
+                  <p>
+                    Learn from people who already achieved what you want. A good mentor guides you on what to learn,
+                    how to practice, and how to avoid common mistakes.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tab-panel" id="multi">
+            <div class="accordion">
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Collaborate with Colleagues
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-body">
+                  <p>
+                    Share knowledge with your peers, discuss problems, and review each other's code. Collaboration
+                    speeds up learning and builds confidence.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Learn Anything Quickly
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-body">
+                  <p>
+                    Use focused sprints, hands‑on projects, and repetition. Instead of reading everything, practice the
+                    top real‑time scenarios again and again.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Reasons People Give Up on Their Goals Too Early
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-body">
+                  <p>
+                    Many people stop when results are not immediate. Stay consistent for at least 90 days and track
+                    your progress weekly to stay motivated.
+                  </p>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <button class="accordion-header">
+                  Signs of Settling For Less In Life
+                  <span class="accordion-icon">+</span>
+                </button>
+                <div class="accordion-body">
+                  <p>
+                    If you stop challenging yourself or avoid new responsibilities, you may be settling. Continuously
+                    upgrade your skills to create better opportunities.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // Tabs
+        document.querySelectorAll('.tabs-header .tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.tabs-header .tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tabs-body .tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+          });
+        });
+
+        // Accordion behaviour (allow multiple open, similar to Magnus examples)
+        document.querySelectorAll('.accordion-header').forEach(header => {
+          header.addEventListener('click', () => {
+            const body = header.nextElementSibling;
+            const isOpen = body.classList.contains('open');
+            if (isOpen) {
+              body.classList.remove('open');
+              header.querySelector('.accordion-icon').textContent = '+';
+            } else {
+              body.classList.add('open');
+              header.querySelector('.accordion-icon').textContent = '-';
+            }
+          });
+        });
+      </script>
+    </section>
+  ` 
+}) %>
+
+

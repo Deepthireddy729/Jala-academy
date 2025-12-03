@@ -1,0 +1,47 @@
+<%- include('layout', { 
+  title: 'More - Multiple Tabs', 
+  body: `
+    <section class="dashboard">
+      <h1>Tabs</h1>
+      <div class="tabs">
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="plan">Plan to Succeed</button>
+          <button class="tab-btn" data-tab="unlearn">UnLearning</button>
+          <button class="tab-btn" data-tab="ways">Ways of Unlearning</button>
+        </div>
+        <div class="tabs-body">
+          <div class="tab-panel active" id="plan">
+            <p>
+              Congratulations, you are in one of the best places to learn technologies for a job.
+              Follow the plan seriously for the first 45 days to see great results.
+            </p>
+          </div>
+          <div class="tab-panel" id="unlearn">
+            <p>
+              You must <strong>UNLEARN to LEARN</strong> new things every day as technologies change faster than ever.
+              Old rules may no longer apply, so it is important to think beyond what you already know.
+            </p>
+          </div>
+          <div class="tab-panel" id="ways">
+            <p>
+              Focus on real-time scenarios, build projects, and regularly revise concepts.
+              That is how you use your knowledge and experience to get a job in less than 100 days.
+            </p>
+          </div>
+        </div>
+      </div>
+      <script>
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+          });
+        });
+      </script>
+    </section>
+  ` 
+}) %>
+
+

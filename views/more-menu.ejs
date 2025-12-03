@@ -1,0 +1,73 @@
+<%- include('layout', { 
+  title: 'More - Menu', 
+  body: `
+    <section class="dashboard">
+      <h1>Menu</h1>
+      <div class="tabs">
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="single">Single Menus</button>
+          <button class="tab-btn" data-tab="sub">Sub Menus</button>
+        </div>
+        <div class="tabs-body menu-body">
+          <div class="tab-panel active" id="single">
+            <div class="menu-layout">
+              <div class="menu-column">
+                <button class="menu-btn" data-label="Testing">Testing</button>
+                <button class="menu-btn" data-label="Java">Java</button>
+                <button class="menu-btn" data-label=".Net">.Net</button>
+                <button class="menu-btn" data-label="Data Base">Data Base</button>
+              </div>
+              <div class="menu-message" id="menuMessage">
+                Please select a menu option.
+              </div>
+            </div>
+          </div>
+          <div class="tab-panel" id="sub">
+            <div class="menu-layout">
+              <div class="menu-column">
+                <button class="menu-btn" data-label="Selenium">Selenium</button>
+                <button class="menu-btn" data-label="API Testing">API Testing</button>
+                <button class="menu-btn" data-label="UI Testing">UI Testing</button>
+              </div>
+              <div class="menu-message" id="submenuMessage">
+                Please select a sub menu option.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // Tabs switching
+        document.querySelectorAll('.tabs-header .tab-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('.tabs-header .tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tabs-body .tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+          });
+        });
+
+        // Single menu buttons
+        document.querySelectorAll('#single .menu-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const label = btn.getAttribute('data-label');
+            const msg = document.getElementById('menuMessage');
+            msg.textContent = 'You have selected ' + label + ' Menu Option.';
+          });
+        });
+
+        // Sub menu buttons
+        document.querySelectorAll('#sub .menu-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const label = btn.getAttribute('data-label');
+            const msg = document.getElementById('submenuMessage');
+            msg.textContent = 'You have selected ' + label + ' Sub Menu Option.';
+          });
+        });
+      </script>
+    </section>
+  ` 
+}) %>
+
+

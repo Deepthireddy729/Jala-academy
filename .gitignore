@@ -1,0 +1,21 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Env
+.env
+
+# SQLite database
+jala.db
+
+# Uploads
+uploads/
+
+# IDE/editor
+.DS_Store
+*.swp
+.vscode/
+
+# Generated
+tunnel-url.txt
