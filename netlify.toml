@@ -1,0 +1,16 @@
+[build]
+  publish = "public"
+  command = "npm install"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/*"
+  to = "https://jala-app-api.glitch.me/:splat"
+  status = 200
+  force = true
+
+[dev]
+  command = "npm start"
+  port = 3000

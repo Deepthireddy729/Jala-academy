@@ -711,8 +711,12 @@ app.post('/more/settings', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`JALA Magnus clone running on http://localhost:${PORT}`);
-});
 
+// For Vercel deployment, only listen if not in serverless environment
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`JALA Magnus clone running on http://localhost:${PORT}`);
+  });
+}
 
+module.exports = app;
