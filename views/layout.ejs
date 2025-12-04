@@ -2,17 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta name="theme-color" content="#2563eb" />
   <title><%= title %> - JALA Magnus Clone</title>
   <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body class="app-shell">
   <header class="app-topbar">
+    <button class="menu-toggle" aria-label="Toggle menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 18H21V16H3V18ZM3 13H21V11H3V13ZM3 6V8H21V6H3Z" fill="currentColor"/>
+      </svg>
+    </button>
     <div class="app-brand">Magnus</div>
     <div class="app-topbar-right">
       <span class="app-breadcrumb">🏠 <span>Home</span> &gt; <span><%= title %></span></span>
       <a href="/logout" class="top-logout">Logout →</a>
     </div>
   </header>
+  <div class="mobile-overlay"></div>
 
   <div class="app-main">
     <aside class="app-sidebar">
@@ -162,6 +171,24 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Mobile menu toggle
+      const menuToggle = document.querySelector('.menu-toggle');
+      const sidebar = document.querySelector('.app-sidebar');
+      const overlay = document.querySelector('.mobile-overlay');
+      
+      function toggleMenu() {
+        document.body.classList.toggle('menu-open');
+        sidebar.classList.toggle('mobile-open');
+        overlay.classList.toggle('active');
+      }
+      
+      if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+      }
+      
+      if (overlay) {
+        overlay.addEventListener('click', toggleMenu);
+      }
       // Handle collapsible menu sections
       document.querySelectorAll('.nav-toggle').forEach(toggle => {
         toggle.addEventListener('click', function(e) {
