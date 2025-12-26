@@ -9,12 +9,12 @@ const db = require('../db');
 const app = express();
 
 // View engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs');
 
 // Static files
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static(path.join(__dirname, '../public')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
